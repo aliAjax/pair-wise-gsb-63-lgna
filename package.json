@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite --port 18463",
     "build": "vue-tsc --noEmit -p tsconfig.app.json && vite build",
-    "preview": "vite preview --port 18463"
+    "preview": "vite preview --port 18463",
+    "verify": "esbuild scripts/verify.ts --bundle --platform=node --format=esm \"--banner:js=import{createRequire as __cr}from'module';const require=__cr(import.meta.url);\" --define:import.meta.env={} --outfile=node_modules/.verify.mjs --log-level=warning && node node_modules/.verify.mjs"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.66.8",

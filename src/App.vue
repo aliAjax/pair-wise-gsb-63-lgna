@@ -9,6 +9,7 @@ const store = useInspectionStore()
 let disconnect: () => void = () => undefined
 
 const pageTitle = computed(() => {
+  if (route.name === 'sync') return '断网补录与回网合并'
   if (route.name === 'defects') return '缺陷处置看板'
   if (route.name === 'audit') return '检验审计'
   if (route.name === 'record') return '检验任务详情'
@@ -33,8 +34,9 @@ onUnmounted(() => disconnect())
       </div>
       <nav>
         <RouterLink to="/"><span>01</span>检验总览</RouterLink>
-        <RouterLink to="/defects"><span>02</span>缺陷处置</RouterLink>
-        <RouterLink to="/audit"><span>03</span>操作审计</RouterLink>
+        <RouterLink to="/sync"><span>02</span>断网补传</RouterLink>
+        <RouterLink to="/defects"><span>03</span>缺陷处置</RouterLink>
+        <RouterLink to="/audit"><span>04</span>操作审计</RouterLink>
       </nav>
       <div class="sidebar-status">
         <i />

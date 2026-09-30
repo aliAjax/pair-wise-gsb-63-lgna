@@ -49,11 +49,16 @@ function createRecord() {
 
 <template>
   <section class="content">
+    <div v-if="store.pendingBatches.length" class="pending-banner" @click="router.push('/sync')">
+      <strong>有 {{ store.stats.pendingBatches }} 个补传批次待处理</strong>
+      <span>{{ store.stats.lockedDevices }} 台设备因合并未确认处于锁定停用，前往断网补传中心处理 →</span>
+    </div>
+
     <div class="metric-strip">
-      <article><span>今日检验任务</span><strong>{{ store.stats.total }}</strong><small>含复用演示记录</small></article>
-      <article><span>停用设备</span><strong>{{ store.stats.blocked }}</strong><small>需优先核实隔离状态</small></article>
-      <article><span>临近超期</span><strong>{{ store.stats.overdue }}</strong><small>按整改截止日计算</small></article>
-      <article><span>已闭环</span><strong>{{ store.stats.closed }}</strong><small>异常项已复核完成</small></article>
+      <article><span>检验记录</span><strong>{{ store.stats.total }}</strong><small>设备 / 记录 / 缺陷已关联</small></article>
+      <article><span>停用设备</span><strong>{{ store.stats.blocked }}</strong><small>{{ store.stats.lockedDevices }} 台待值班长确认解锁</small></article>
+      <article><span>超期未闭环缺陷</span><strong>{{ store.stats.overdue }}</strong><small>只统计当前有效版本</small></article>
+      <article><span>已关闭缺陷</span><strong>{{ store.stats.closed }}</strong><small>复测通过方可关闭</small></article>
     </div>
 
     <div class="toolbar">

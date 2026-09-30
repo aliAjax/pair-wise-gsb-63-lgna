@@ -33,8 +33,11 @@ export function createOfflineInspection(draft: InspectionDraft): InspectionRecor
     ],
     evidenceCount: 0,
     version: 1,
+    baselineVersion: 1,
     createdAt: now,
-    updatedAt: now
+    updatedAt: now,
+    deviceId: '',
+    defectIds: []
   }
 }
 
