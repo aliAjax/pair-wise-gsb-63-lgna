@@ -1,0 +1,26 @@
+{
+  "name": "pair-wise-gsb-63",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 18463",
+    "build": "vue-tsc --noEmit -p tsconfig.app.json && vite build",
+    "preview": "vite preview --port 18463"
+  },
+  "dependencies": {
+    "@tanstack/vue-query": "^5.66.8",
+    "axios": "^1.7.9",
+    "naive-ui": "^2.40.1",
+    "pinia": "^2.3.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "typescript": "~5.6.3",
+    "vite": "^6.0.3",
+    "vue-tsc": "^2.1.10"
+  }
+}
