@@ -50,10 +50,10 @@ function createRecord() {
 <template>
   <section class="content">
     <div class="metric-strip">
-      <article><span>今日检验任务</span><strong>{{ store.stats.total }}</strong><small>含复用演示记录</small></article>
-      <article><span>停用设备</span><strong>{{ store.stats.blocked }}</strong><small>需优先核实隔离状态</small></article>
-      <article><span>临近超期</span><strong>{{ store.stats.overdue }}</strong><small>按整改截止日计算</small></article>
-      <article><span>已闭环</span><strong>{{ store.stats.closed }}</strong><small>异常项已复核完成</small></article>
+      <article><span>今日检验任务</span><strong>{{ store.stats.total }}</strong><small>当前有效版本</small></article>
+      <article><span>停用设备</span><strong>{{ store.stats.blocked }}</strong><small>含合并锁定待确认</small></article>
+      <article><span>待办（冲突/批次/失败）</span><strong>{{ store.stats.pendingConflicts + store.stats.pendingBatches + store.stats.failedReleases }}</strong><small>仅统计当前有效版本</small></article>
+      <article><span>已闭环缺陷</span><strong>{{ store.stats.closed }}</strong><small>复测通过并放行</small></article>
     </div>
 
     <div class="toolbar">
@@ -61,6 +61,7 @@ function createRecord() {
       <NSelect v-model:value="store.status" :options="statusOptions" />
       <NSelect v-model:value="store.area" :options="areaOptions" />
       <NButton type="primary" @click="showCreate = true">新建检验任务</NButton>
+      <NButton tertiary @click="router.push('/sync')">断网补录 / 回网合并</NButton>
       <span class="query-state">{{ isFetching ? '正在同步' : '本地数据已加载' }}</span>
     </div>
 

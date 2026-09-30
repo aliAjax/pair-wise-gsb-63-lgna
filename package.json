@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite --port 18463",
     "build": "vue-tsc --noEmit -p tsconfig.app.json && vite build",
-    "preview": "vite preview --port 18463"
+    "preview": "vite preview --port 18463",
+    "verify:rules": "esbuild scripts/verify-rules.ts --bundle --platform=node --format=esm --outfile=node_modules/.verify-rules.mjs && node node_modules/.verify-rules.mjs",
+    "verify:store": "esbuild scripts/verify-store.ts --bundle --platform=node --format=esm --outfile=node_modules/.verify-store.mjs --alias:axios=./scripts/stubs/axios.js '--define:import.meta.env={\"VITE_API_BASE_URL\":\"\"}' && node node_modules/.verify-store.mjs",
+    "verify": "npm run verify:rules && npm run verify:store"
   },
   "dependencies": {
     "@tanstack/vue-query": "^5.66.8",

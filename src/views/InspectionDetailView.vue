@@ -23,6 +23,9 @@ watch(record, (value) => {
 
 const items = computed(() => record.value?.items ?? [])
 const transitions: InspectionStatus[] = ['待检验', '需整改', '整改中', '待复测', '已关闭', '停用']
+const device = computed(() => record.value ? store.devices.find((item) => item.code === record.value!.deviceCode) : undefined)
+const linkedDefects = computed(() => record.value ? store.defects.filter((defect) => defect.recordId === record.value!.id && defect.active) : [])
+const unresolvedConflicts = computed(() => record.value?.conflicts.filter((conflict) => !conflict.resolved) ?? [])
 
 function save() {
   if (!record.value) return
@@ -79,10 +82,28 @@ function exportRecord() {
           <h2>{{ record.deviceName }}</h2>
         </div>
         <div class="head-actions">
+          <NTag v-if="device?.mergeLocked" type="warning" :bordered="false">合并锁定·待值班长确认</NTag>
           <NTag :type="record.stopped ? 'error' : record.status === '已关闭' ? 'success' : 'warning'" :bordered="false">{{ record.stopped ? '设备已停用' : record.status }}</NTag>
           <NButton @click="exportRecord">导出记录</NButton>
           <NButton type="primary" @click="save">保存新版本</NButton>
         </div>
+      </div>
+
+      <div v-if="unresolvedConflicts.length" class="conflict-banner">
+        <strong>{{ unresolvedConflicts.length }} 个字段并列冲突</strong>
+        <span>补录值与值班室值都保留在当前版本，需值班长在「断网补录·合并」页裁决后才能确认放行。</span>
+        <div v-for="conflict in unresolvedConflicts" :key="conflict.field" class="conflict-mini">
+          <b>{{ conflict.fieldLabel }}</b>
+          <em>补录：{{ conflict.offlineValue }}</em>
+          <em>值班室：{{ conflict.onlineValue }}</em>
+        </div>
+      </div>
+
+      <div v-if="linkedDefects.length" class="defect-strip">
+        <span class="side-label">关联缺陷（当前有效版本）</span>
+        <NTag v-for="defect in linkedDefects" :key="defect.id" :type="defect.status === '已关闭' ? 'success' : defect.retestPassed ? 'info' : 'warning'" size="small" :bordered="false">
+          {{ defect.title }} · {{ defect.status }}
+        </NTag>
       </div>
 
       <div class="form-band">
@@ -105,7 +126,8 @@ function exportRecord() {
       <div>
         <span class="side-label">当前流程</span>
         <strong>{{ record.status }}</strong>
-        <small>版本 V{{ record.version }} · 更新于 {{ record.updatedAt.replace('T', ' ').slice(0, 16) }}</small>
+        <small>版本 V{{ record.version }} · 合并基线 V{{ record.baselineVersion }} · 更新于 {{ record.updatedAt.replace('T', ' ').slice(0, 16) }}</small>
+        <small v-if="device?.mergeLocked" style="color:#b47a1c">设备合并锁定中，值班长确认前不能恢复开放</small>
       </div>
       <div class="flow-list">
         <button v-for="status in transitions" :key="status" :class="{ active: status === record.status }" @click="changeStatus(status)">

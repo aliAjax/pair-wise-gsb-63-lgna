@@ -99,3 +99,73 @@ h3 { font-size: 15px; margin: 0 0 10px; }
 .audit-card p { margin: 8px 0; color: #5e6c69; font-size: 12px; }
 .audit-card small { color: #8b9794; font-size: 11px; }
 .empty-state { padding: 80px; text-align: center; color: #71807d; }
+
+/* ---------- 断网补录 / 回网合并 ---------- */
+.sync-layout { display: grid; gap: 16px; }
+.migrate-banner { margin-bottom: 2px; }
+.sync-card { background: white; border: 1px solid #dbe2df; border-radius: 5px; padding: 18px 20px; }
+.sync-head { margin-bottom: 14px; }
+.sync-head h2 { margin: 0 0 5px; font-size: 17px; }
+.sync-head p { margin: 0; color: #778684; font-size: 12px; line-height: 1.6; }
+.sync-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+.sync-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+.batch-form { display: grid; gap: 10px; }
+.batch-form label { font-size: 12px; color: #63726f; display: grid; gap: 5px; }
+.batch-form label.full { grid-column: 1 / -1; }
+.block-title { font-size: 12px; color: #15434a; margin-top: 4px; border-top: 1px dashed #d8e0dd; padding-top: 10px; }
+.change-row { display: grid; grid-template-columns: 1fr 200px; gap: 10px; align-items: center; font-size: 12px; }
+.retest-title { display: none; }
+.fail-switch { display: flex; align-items: center; gap: 8px; font-size: 12px; color: #b44137; white-space: nowrap; }
+
+.duty-list { display: grid; gap: 10px; max-height: 520px; overflow: auto; }
+.duty-item { border: 1px solid #e2e8e5; border-radius: 4px; padding: 10px 12px; display: grid; gap: 8px; }
+.duty-item header { display: flex; justify-content: space-between; align-items: center; }
+.duty-item header strong { font-size: 13px; }
+.duty-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.amend { display: flex; gap: 6px; margin-left: auto; }
+.amend .n-input { width: 150px; }
+.defect-line { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding-top: 8px; border-top: 1px dashed #e7edea; flex-wrap: wrap; }
+.defect-buttons { display: flex; gap: 4px; }
+
+.batch-card { border: 1px solid #dde4e1; border-left: 3px solid #1c5a60; border-radius: 4px; padding: 12px 14px; margin-top: 10px; display: grid; gap: 10px; }
+.batch-card > header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+.batch-title { display: flex; gap: 8px; align-items: center; }
+.batch-title strong { font-size: 13px; }
+.batch-card > header small { color: #80908e; font-size: 11px; }
+.batch-actions { display: flex; gap: 10px; align-items: center; font-size: 12px; color: #71807d; }
+.no-conflict { font-size: 12px; color: #3f8f6a; background: #eef7f1; padding: 8px 10px; border-radius: 3px; }
+.confirmed-line { font-size: 12px; color: #71807d; }
+.conflict-panel { background: #fbf6ea; border: 1px solid #ead9a8; border-radius: 4px; padding: 10px 12px; display: grid; gap: 8px; }
+.conflict-panel > strong { font-size: 12px; color: #8a6d2c; }
+.conflict-row { border-top: 1px solid #eedfb4; padding-top: 8px; }
+.conflict-inner { display: grid; grid-template-columns: 150px 1fr auto; gap: 10px; align-items: center; }
+.conflict-inner.resolved { opacity: .75; }
+.conflict-label { font-size: 12px; color: #5f5735; font-weight: 600; }
+.conflict-values { display: flex; gap: 10px; }
+.conflict-side { flex: 1; display: grid; gap: 2px; padding: 6px 8px; border-radius: 3px; font-size: 12px; }
+.conflict-side.offline { background: #eef3fb; border: 1px solid #cdd9ee; }
+.conflict-side.online { background: #f0efea; border: 1px solid #ddd8c2; }
+.conflict-side small { color: #8b9794; font-size: 10px; }
+.conflict-side b { font-size: 12px; color: #30403e; }
+.conflict-btns { display: flex; gap: 6px; }
+.release-fail :first-child { align-items: center; }
+
+.kanban-5 { grid-template-columns: repeat(5, 1fr); }
+
+/* 详情页缺陷/冲突提示 */
+.conflict-banner { background: #fbf6ea; border: 1px solid #ead9a8; border-radius: 4px; padding: 12px 14px; margin-bottom: 16px; display: grid; gap: 8px; }
+.conflict-banner > strong { font-size: 13px; color: #8a6d2c; }
+.conflict-banner > span { font-size: 12px; color: #7c7048; }
+.conflict-mini { display: flex; gap: 14px; font-size: 12px; align-items: baseline; }
+.conflict-mini b { color: #5f5735; }
+.conflict-mini em { font-style: normal; padding: 2px 8px; border-radius: 3px; background: white; border: 1px solid #e6d9b0; }
+.defect-strip { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; background: #f4f7f5; padding: 10px 12px; border-radius: 4px; }
+
+/* 审计页 */
+.audit-tools { display: flex; gap: 12px; align-items: center; }
+.version-switch { display: flex; gap: 8px; align-items: center; font-size: 12px; color: #71807d; white-space: nowrap; }
+.audit-count { font-size: 12px; color: #71807d; margin-bottom: 6px; }
+.audit-title { display: flex; gap: 8px; align-items: center; }
+.timeline article.inactive { opacity: .5; }
+.timeline article.inactive .audit-card { text-decoration: none; }
+
